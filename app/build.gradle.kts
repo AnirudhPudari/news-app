@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
@@ -21,6 +24,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildFeatures.buildConfig = true
+
+        val properties = Properties()
+        properties.load(FileInputStream(rootProject.file("local.properties")))
+        val apiKey: String = properties.getProperty("API_KEY")
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
     }
 
     buildTypes {
@@ -68,7 +78,6 @@ dependencies {
         implementation(libs.androidx.core.ktx)
         implementation(libs.androidx.lifecycle.runtime.ktx)
         implementation(libs.androidx.activity.compose)
-//        implementation(libs.kotlinx.coroutines.android)
 
         // Compose
         val composeBom = platform(libs.androidx.compose.bom)
@@ -95,7 +104,6 @@ dependencies {
         androidTestImplementation(libs.androidx.espresso.core)
 
         // UI Tests
-//        androidTestImplementation(libs.kotlinx.coroutines.android.test)
         debugImplementation(libs.androidx.compose.ui.tooling.core)
         androidTestImplementation(libs.androidx.compose.ui.test.junit)
         debugImplementation(libs.androidx.compose.ui.tooling.preview)
