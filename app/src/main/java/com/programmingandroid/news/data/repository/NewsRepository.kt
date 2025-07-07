@@ -1,6 +1,7 @@
 package com.programmingandroid.news.data.repository
 
 import com.programmingandroid.news.data.model.remote.NewsResponse
+import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
 
@@ -10,15 +11,15 @@ interface NewsRepository {
         toDate: String? = null,
         sortBy: String? = null,
         pageSize: Int = 20
-    ): Result<NewsResponse>
+    ): Flow<Result<NewsResponse>>
 
     suspend fun getTopHeadlines(
         country: String = "us",
         fromDate: String? = null
-    ): Result<NewsResponse>
+    ): Flow<Result<NewsResponse>>
 
     suspend fun getHeadlinesFromSources(
         country: String = "us",
         category: String = ""
-    ): Result<NewsResponse>
+    ): Flow<Result<NewsResponse>>
 }
