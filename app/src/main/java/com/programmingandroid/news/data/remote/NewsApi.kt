@@ -12,20 +12,20 @@ interface NewsApi {
         @Query("from") fromDate: String? = null,
         @Query("to") toDate: String? = null,
         @Query("sortBy") sortBy: String? = null,
-        @Query("pageSize") pageSize: Int = 20,
+        @Query("pageSize") pageSize: Int = 20
     ): NewsResponse
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
         @Query("country") country: String? = "us",
-        @Query("from") fromDate: String? = null,
+        @Query("from") fromDate: String? = null
     ): NewsResponse
 
-    //Get Headlines from sources
-    //Sources: Default,business,entertainment,general,health,science,sports,technology
+    // Get Headlines from sources
+    // Sources: Default,business,entertainment,general,health,science,sports,technology
     @GET("top-headlines/sources")
     suspend fun getHeadlinesFromSources(
         @Query("country") country: String? = "us",
-        @Query("category") category: String? = "",
+        @Query("category") category: String? = ""
     ): NewsResponse
 }

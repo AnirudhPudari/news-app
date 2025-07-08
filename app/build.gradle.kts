@@ -1,5 +1,6 @@
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     alias(libs.plugins.hilt)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.klint)
 }
 
 android {
@@ -70,43 +72,50 @@ android {
     }
 }
 
+ktlint {
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.CHECKSTYLE)
+        reporter(ReporterType.SARIF)
+    }
+}
+
 dependencies {
 
-    dependencies {
+    // Core Libraries
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
 
-        // Core Libraries
-        implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.lifecycle.runtime.ktx)
-        implementation(libs.androidx.activity.compose)
+    // Compose
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
 
-        // Compose
-        val composeBom = platform(libs.androidx.compose.bom)
-        implementation(composeBom)
-        implementation(libs.androidx.compose.ui.tooling.preview)
-        implementation(libs.androidx.compose.material3)
-        implementation(libs.androidx.ui)
-        implementation(libs.androidx.ui.graphics)
+    // Hilt for Dependency Injection
+    implementation(libs.hilt.android.core)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
 
-        // Hilt for Dependency Injection
-        implementation(libs.hilt.android.core)
-        implementation(libs.androidx.hilt.navigation.compose)
-        ksp(libs.hilt.compiler)
+    // Retrofit for Networking
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
 
-        // Retrofit for Networking
-        implementation(libs.retrofit)
-        implementation(libs.converter.gson)
-        implementation(libs.logging.interceptor)
+    // Testing
+    testImplementation(libs.junit)
+    androidTestImplementation(composeBom)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
-        // Testing
-        testImplementation(libs.junit)
-        androidTestImplementation(composeBom)
-        androidTestImplementation(libs.androidx.junit)
-        androidTestImplementation(libs.androidx.espresso.core)
-
-        // UI Tests
-        debugImplementation(libs.androidx.compose.ui.tooling.core)
-        androidTestImplementation(libs.androidx.compose.ui.test.junit)
-        debugImplementation(libs.androidx.compose.ui.tooling.preview)
-        debugImplementation(libs.androidx.compose.ui.test.manifest)
-    }
+    // UI Tests
+    debugImplementation(libs.androidx.compose.ui.tooling.core)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit)
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
