@@ -1,5 +1,6 @@
 package com.programmingandroid.news.core.di
 
+import com.programmingandroid.news.BuildConfig
 import com.programmingandroid.news.data.remote.NewsApi
 import dagger.Module
 import dagger.Provides
