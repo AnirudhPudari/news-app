@@ -17,15 +17,13 @@ interface NewsApi {
 
     @GET("top-headlines")
     suspend fun getTopHeadlines(
-        @Query("country") country: String? = "us",
-        @Query("from") fromDate: String? = null
+        @Query("country") country: String? = "us", @Query("from") fromDate: String? = null
     ): NewsResponse
 
     // Get Headlines from sources
     // Sources: Default,business,entertainment,general,health,science,sports,technology
     @GET("top-headlines/sources")
     suspend fun getHeadlinesFromSources(
-        @Query("country") country: String? = "us",
-        @Query("category") category: String? = ""
+        @Query("country") country: String? = "us", @Query("category") category: String? = ""
     ): NewsResponse
 }
