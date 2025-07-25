@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.programmingandroid.news.presentation.NewsApp
-import com.programmingandroid.news.ui.theme.NewsTheme
+import com.programmingandroid.news.core.theme.NewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

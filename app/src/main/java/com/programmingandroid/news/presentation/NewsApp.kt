@@ -15,7 +15,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.programmingandroid.news.presentation.navigation.AppNavGraph
 import com.programmingandroid.news.presentation.navigation.bottomNavItems
-import com.programmingandroid.news.ui.theme.NewsTheme
+import com.programmingandroid.news.core.theme.NewsTheme
+import com.programmingandroid.news.presentation.components.NewsTopBar
 
 @Composable
 fun NewsApp(modifier: Modifier = Modifier) {
@@ -28,6 +29,7 @@ fun NewsApp(modifier: Modifier = Modifier) {
 
         Scaffold(
             modifier = modifier,
+            topBar = { NewsTopBar(currentRoute = currentRoute) },
             bottomBar = {
                 NavigationBar(
                     windowInsets = NavigationBarDefaults.windowInsets

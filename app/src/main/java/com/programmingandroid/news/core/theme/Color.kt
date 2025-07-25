@@ -1,4 +1,4 @@
-package com.programmingandroid.news.ui.theme
+package com.programmingandroid.news.core.theme
 
 import androidx.compose.ui.graphics.Color
 

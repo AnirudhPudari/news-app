@@ -1,4 +1,4 @@
-package com.programmingandroid.news.ui.theme
+package com.programmingandroid.news.core.theme
 
 import android.app.Activity
 import android.os.Build
@@ -76,6 +76,7 @@ fun NewsTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = NewsShapes,
         content = content
     )
 }
