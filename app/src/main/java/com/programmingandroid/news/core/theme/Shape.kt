@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.programmingandroid.news.core.util
+package com.programmingandroid.news.core.theme
 
-/**
- * A generic class that holds a value or an exception
- */
-sealed class Result<out R> {
-    data class Success<out T>(val data: T) : Result<T>()
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Shapes
+import androidx.compose.ui.unit.dp
 
-    data class Error(val exception: Exception) : Result<Nothing>()
-}
-
-fun <T> Result<T>.successOr(fallback: T): T {
-    return (this as? Result.Success<T>)?.data ?: fallback
-}
+val NewsShapes =
+    Shapes(
+        small = RoundedCornerShape(4.dp),
+        medium = RoundedCornerShape(4.dp),
+        large = RoundedCornerShape(8.dp),
+    )

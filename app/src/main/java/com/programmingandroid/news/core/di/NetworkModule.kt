@@ -6,17 +6,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     private const val BASE_URL = "https://newsapi.org/v2/"
     private const val API_KEY = BuildConfig.API_KEY
 
@@ -51,9 +50,10 @@ object NetworkModule {
 
 class ApiKeyInterceptor(private val apiKey: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val newRequest = chain.request().newBuilder()
-            .addHeader("X-Api-Key", apiKey)
-            .build()
+        val newRequest =
+            chain.request().newBuilder()
+                .addHeader("X-Api-Key", apiKey)
+                .build()
         return chain.proceed(newRequest)
     }
 }

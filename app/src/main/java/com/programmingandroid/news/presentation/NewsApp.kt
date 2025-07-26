@@ -13,9 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.programmingandroid.news.core.theme.NewsTheme
+import com.programmingandroid.news.presentation.components.NewsTopBar
 import com.programmingandroid.news.presentation.navigation.AppNavGraph
 import com.programmingandroid.news.presentation.navigation.bottomNavItems
-import com.programmingandroid.news.ui.theme.NewsTheme
 
 @Composable
 fun NewsApp(modifier: Modifier = Modifier) {
@@ -28,9 +29,10 @@ fun NewsApp(modifier: Modifier = Modifier) {
 
         Scaffold(
             modifier = modifier,
+            topBar = { NewsTopBar(currentRoute = currentRoute) },
             bottomBar = {
                 NavigationBar(
-                    windowInsets = NavigationBarDefaults.windowInsets
+                    windowInsets = NavigationBarDefaults.windowInsets,
                 ) {
                     bottomNavItems.forEachIndexed { index, item ->
                         NavigationBarItem(
@@ -40,15 +42,15 @@ fun NewsApp(modifier: Modifier = Modifier) {
                             onClick = {
                                 navController.navigate(item.route)
                                 selectedIndex = index
-                            }
+                            },
                         )
                     }
                 }
-            }
+            },
         ) { innerPadding ->
             AppNavGraph(
                 navController = navController,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
             )
         }
     }
