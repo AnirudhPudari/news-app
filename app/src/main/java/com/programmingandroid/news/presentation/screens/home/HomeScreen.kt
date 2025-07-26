@@ -25,9 +25,10 @@ import com.programmingandroid.news.presentation.components.newsTabs
 @Composable
 fun HomeScreen() {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(0.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(0.dp),
     ) {
         NewsAppTabs(tabs = newsTabs, onTabSelected = {})
         DefaultHomeContent()
@@ -37,27 +38,28 @@ fun HomeScreen() {
 @Composable
 private fun DefaultHomeContent() {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         Icon(
             imageVector = Icons.Default.Home,
             contentDescription = stringResource(R.string.home_icon_desc),
             modifier = Modifier.size(64.dp),
-            tint = MaterialTheme.colorScheme.primary
+            tint = MaterialTheme.colorScheme.primary,
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = stringResource(R.string.home_title),
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineMedium,
         )
         Text(
             text = stringResource(R.string.home_subtitle),
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
     }
 }

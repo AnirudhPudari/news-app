@@ -7,5 +7,5 @@ data class TabItem(
     val route: String,
     val label: String,
     val icon: ImageVector? = null,
-    val content: @Composable () -> Unit
+    val content: @Composable () -> Unit,
 )
