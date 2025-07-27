@@ -4,9 +4,29 @@ import java.io.File
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.klint) apply false
     alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.spotless) apply false
     id("com.google.devtools.ksp") version "2.0.21-1.0.27" apply false
+}
+
+
+subprojects {
+    apply(plugin = "com.diffplug.spotless")
+    configure<com.diffplug.gradle.spotless.SpotlessExtension> {
+        kotlin {
+            target("**/*.kt")
+            targetExclude("${layout.buildDirectory}/**/*.kt")
+            ktlint()
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
+        }
+        kotlinGradle {
+            target("*.gradle.kts")
+            targetExclude("${layout.buildDirectory}/**/*.kt")
+            ktlint()
+            // Look for the first line that doesn't have a block comment (assumed to be the license)
+            licenseHeaderFile(rootProject.file("spotless/copyright.kt"), "(^(?![\\/ ]\\*).*$)")
+        }
+    }
 }
 
 tasks.register("printPackages") {
@@ -33,3 +53,5 @@ tasks.register("printPackages") {
             }
     }
 }
+
+
